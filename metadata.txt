@@ -1,0 +1,11 @@
+[general]
+name=Building Footprint Tool
+description=Tool to predict building footprints using YOLO and save as shapefile
+author=Abin Prajapati
+email=abinprajapati@gmail.com
+version=1.0
+qgisMinimumVersion=3.10
+authorEmail=abinprajapati@gmail.com
+category=Analysis
+icon=icon.png
+about=Plugin for extracting building footprints from a polygon layer.
