@@ -1,5 +1,5 @@
 from qgis.core import Qgis, QgsProject, QgsVectorLayer
-from qgis.PyQt.QtWidgets import QAction, QMessageBox, QDialog, QVBoxLayout, QPushButton, QLabel, QLineEdit, QFileDialog
+from qgis.PyQt.QtWidgets import QAction, QMessageBox, QDialog, QVBoxLayout, QPushButton, QLabel, QLineEdit, QFileDialog, QHBoxLayout
 from qgis.PyQt.QtGui import QIcon
 from qgis.gui import QgisInterface
 import os
@@ -73,20 +73,28 @@ class BuildingFootprintTool:
         # Output shapefile label and button
         output_label = QLabel("Select the save location for shapefile:")
         layout.addWidget(output_label)
-        output_browse_button = QPushButton("Browse Save Location")
+        output_browse_button = QPushButton("Output Location")
         layout.addWidget(output_browse_button)
         self.output_field = QLineEdit()
         self.output_field.setReadOnly(True)
         layout.addWidget(self.output_field)
 
-        # Submit button
-        submit_button = QPushButton("Submit")
-        layout.addWidget(submit_button)
+        # Submit button and Close button in horizontal layout
+        button_layout = QHBoxLayout()  # Create a horizontal layout for buttons
+        submit_button = QPushButton("Run")
+        button_layout.addWidget(submit_button)
+        
+        close_button = QPushButton("Close")
+        button_layout.addWidget(close_button)
+
+        layout.addLayout(button_layout)  # Add the horizontal button layout to the main layout
+
 
         # Connect buttons
         input_browse_button.clicked.connect(self.browse_image)
         output_browse_button.clicked.connect(self.browse_save_location)
         submit_button.clicked.connect(lambda: self.submit(dialog))
+        close_button.clicked.connect(dialog.reject)  # Close the dialog when clicked
 
         dialog.setLayout(layout)
         dialog.exec_()
