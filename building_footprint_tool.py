@@ -18,7 +18,7 @@ class BuildingFootprintToolPlugin:
 
     def initGui(self):
         """Initialize GUI components and connect actions."""
-        self.tool = BuildingFootprintTool(self.iface)  # Initialize the tool
+        self.tool = BuildingFootprintTool(self.iface) 
         self.tool.initGui()
 
     def unload(self):
@@ -165,7 +165,7 @@ class BuildingFootprintTool:
 
         for i, mask in enumerate(masks.data):
             mask_array = mask.numpy()
-            flipped_mask = np.flipud(mask_array)  # Flip both vertically and horizontally
+            flipped_mask = np.flipud(mask_array)  # Flip both vertically
 
             contours, _ = cv2.findContours((flipped_mask * 255).astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             for contour in contours:
